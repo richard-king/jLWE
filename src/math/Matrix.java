@@ -1,22 +1,55 @@
 package math;
 
+import java.util.Random;
+
 public class Matrix
 {
-	private int m, n;
+	private int m, n, q;
 	private int[][] data;
 	
-	public Matrix(int n, int m)
+	public Matrix(int n, int m, boolean b, int q)
 	{
 		this.m = m;
 		this.n = n;
+		this.q = q;
 		this.data = new int[m][n];
+		if(b) rand();
 	}
 	
-	public Matrix(int[][] d)
+	public Matrix(int n, int m, double alpha, int q)
+	{
+		this.m = m;
+		this.n = n;
+		this.q = q;
+		this.data = new int[m][n];
+		psi((alpha * q)/Math.sqrt(2 * Math.PI));
+	}
+	
+	public Matrix(int[][] d, int q)
 	{
 		this.data = d;
 		this.m = data.length;
 		this.n = data[0].length;
+		this.q = q;
+		for(int i = 0; i < m; ++i)
+			for(int j = 0; j < n; ++j)
+				data[i][j] = data[i][j] % q;
+	}
+	
+	private void rand()
+	{
+		Random random = new Random();
+		for(int i = 0; i < this.m; ++i)
+			for(int j = 0; j < this.n; ++j)
+				this.data[i][j] = random.nextInt() % q;
+	}
+	
+	private void psi(double sd)
+	{
+		Random random = new Random();
+		for(int i = 0; i < this.m; ++i)
+			for(int j = 0; j < this.n; ++j)
+				this.data[i][j] = (int) (random.nextGaussian() * sd) % q;
 	}
 	
 	public int getRows()
@@ -47,7 +80,7 @@ public class Matrix
 			for(int j = 0; j < this.n; ++j)
 				d[i][j] += that.get(i, j);
 
-		return new Matrix(d);
+		return new Matrix(d, q);
 	}
 	
 	public Matrix multiply(int a)
@@ -58,7 +91,7 @@ public class Matrix
 			for(int j = 0; j < this.n; ++j)
 				d[i][j] *= a;
 
-		return new Matrix(d);
+		return new Matrix(d, q);
 	}
 	
 	public Matrix subtract(Matrix that)
@@ -75,7 +108,7 @@ public class Matrix
 				for(int k = 0; k < that.getCols(); ++k)
 					d[i][j] += (this.data[i][k] * that.get(k, j));
 		
-		return new Matrix(d);
+		return new Matrix(d, q);
 	}
 	
 	public Matrix postmultiply(Matrix that)
@@ -91,6 +124,6 @@ public class Matrix
 			for(int j = 0; j < this.n; ++j)
 				d[j][i] = this.data[i][j];
 		
-		return new Matrix(d); 
+		return new Matrix(d, q); 
 	}
 }

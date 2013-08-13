@@ -82,4 +82,15 @@ public class Matrix
 	{		
 		return that.premultiply(this);
 	}
+	
+	public Matrix transpose()
+	{
+		int[][] d = new int[this.n][this.m];
+		
+		for(int i = 0; i < this.m; ++i)
+			for(int j = 0; j < this.n; ++j)
+				d[j][i] = this.data[i][j];
+		
+		return new Matrix(d); 
+	}
 }

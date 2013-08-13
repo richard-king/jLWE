@@ -65,4 +65,21 @@ public class Matrix
 	{
 		return this.add(that.multiply(-1));
 	}
+	
+	public Matrix premultiply(Matrix that)
+	{
+		int[][] d = new int[this.getCols()][that.getRows()];
+		
+		for(int i = 0; i < this.getCols(); ++i)
+			for(int j = 0; j < that.getRows(); ++j)
+				for(int k = 0; k < that.getCols(); ++k)
+					d[i][j] += (this.data[i][k] * that.get(k, j));
+		
+		return new Matrix(d);
+	}
+	
+	public Matrix postmultiply(Matrix that)
+	{		
+		return that.premultiply(this);
+	}
 }

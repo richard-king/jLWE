@@ -37,5 +37,19 @@ public class Matrix
 	public void set(int i, int j, int v)
 	{
 		this.data[i][j] = v;
-	}	
+	}
+	
+	public Matrix add(Matrix that)
+	{
+		int[][] d = this.data;
+		for(int i = 0; i < this.m; ++i)
+		{
+			for(int j = 0; j < this.n; ++j)
+			{
+				d[i][j] += that.get(i, j);
+			}
+		}
+		
+		return new Matrix(d);
+	}
 }

@@ -62,6 +62,11 @@ public class Matrix
 		return this.n;
 	}
 	
+	public int getQ()
+	{
+		return this.q;
+	}
+	
 	public int get(int i, int j)
 	{
 		return this.data[i][j];

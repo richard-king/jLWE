@@ -4,7 +4,6 @@ import math.*;
 
 public class LWEFunctions
 {
-
 	public static Vector f(Vector v, int q, int t)
 	{
 		Vector v2 = v;
@@ -18,6 +17,11 @@ public class LWEFunctions
 	public static Vector f_inv(Vector v, int q, int t)
 	{
 		return LWEFunctions.f(v, t, q);
+	}
+	
+	public static Vector decrypt(CipherText ct, PrivateKey pk, int q, int t)
+	{
+		return LWEFunctions.f_inv(ct.getC().add(ct.getU().multiply(pk.getS().transpose())), q, t);
 	}
 	
 }

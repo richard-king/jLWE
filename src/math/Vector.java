@@ -44,13 +44,13 @@ public class Vector
 		return this.m;
 	}
 	
-	public Matrix multiply(Matrix m)
+	public Vector multiply(Matrix m)
 	{
 		int[][] data = new int[1][this.m];
 		data[0] = this.v;
 		
 		Matrix vector = new Matrix(data, m.getQ());
 		
-		return m.premultiply(vector);
+		return new Vector(m.premultiply(vector.transpose()).transpose().getData()[0], this.r);
 	}
 }

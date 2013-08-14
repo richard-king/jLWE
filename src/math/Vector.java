@@ -39,6 +39,11 @@ public class Vector
 		this.v[i] = n;
 	}
 	
+	public int length()
+	{
+		return this.m;
+	}
+	
 	public Matrix multiply(Matrix m)
 	{
 		int[][] data = new int[1][this.m];

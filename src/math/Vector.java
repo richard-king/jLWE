@@ -53,4 +53,10 @@ public class Vector
 		
 		return new Vector(m.premultiply(vector.transpose()).transpose().getData()[0], this.r);
 	}
+	
+	public void add(Vector v)
+	{
+		for(int i = 0; i < m; ++i)
+			this.set(i, this.get(i) + v.get(i));
+	}
 }

@@ -38,4 +38,14 @@ public class Vector
 	{
 		this.v[i] = n;
 	}
+	
+	public Matrix multiply(Matrix m)
+	{
+		int[][] data = new int[1][this.m];
+		data[0] = this.v;
+		
+		Matrix vector = new Matrix(data, m.getQ());
+		
+		return m.premultiply(vector);
+	}
 }

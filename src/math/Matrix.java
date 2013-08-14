@@ -74,7 +74,7 @@ public class Matrix
 	
 	public void set(int i, int j, int v)
 	{
-		this.data[i][j] = v;
+		this.data[i][j] = v % this.q;
 	}
 	
 	public Matrix add(Matrix that)
@@ -83,7 +83,7 @@ public class Matrix
 		
 		for(int i = 0; i < this.m; ++i)
 			for(int j = 0; j < this.n; ++j)
-				d[i][j] += that.get(i, j);
+				d[i][j] += that.get(i, j) % this.q;
 
 		return new Matrix(d, q);
 	}
@@ -94,7 +94,7 @@ public class Matrix
 		
 		for(int i = 0; i < this.m; ++i)
 			for(int j = 0; j < this.n; ++j)
-				d[i][j] *= a;
+				d[i][j] *= a % this.q;
 
 		return new Matrix(d, q);
 	}
@@ -111,7 +111,7 @@ public class Matrix
 		for(int i = 0; i < this.getCols(); ++i)
 			for(int j = 0; j < that.getRows(); ++j)
 				for(int k = 0; k < that.getCols(); ++k)
-					d[i][j] += (this.data[i][k] * that.get(k, j));
+					d[i][j] += (this.data[i][k] * that.get(k, j)) % this.q;
 		
 		return new Matrix(d, q);
 	}
@@ -127,7 +127,7 @@ public class Matrix
 		
 		for(int i = 0; i < this.m; ++i)
 			for(int j = 0; j < this.n; ++j)
-				d[j][i] = this.data[i][j];
+				d[j][i] = this.data[i][j] % this.q;
 		
 		return new Matrix(d, q); 
 	}

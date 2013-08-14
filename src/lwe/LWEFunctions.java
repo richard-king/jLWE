@@ -5,16 +5,19 @@ import math.*;
 public class LWEFunctions
 {
 
-	public static void f(Vector v, int q, int t)
+	public static Vector f(Vector v, int q, int t)
 	{
-		int len = v.length();
+		Vector v2 = v;
+		int len = v2.length();
 		for(int i = 0; i < len; ++i)
-			v.set(i, (int)(((double)v.get(i) * ((double)q/(double)t)) % q));
+			v2.set(i, (int)(((double)v2.get(i) * ((double)q/(double)t)) % q));
+		
+		return v2;
 	}
 	
-	public static void f_inv(Vector v, int q, int t)
+	public static Vector f_inv(Vector v, int q, int t)
 	{
-		f(v, t, q);
+		return LWEFunctions.f(v, t, q);
 	}
 	
 }

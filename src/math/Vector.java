@@ -54,15 +54,23 @@ public class Vector
 		return new Vector(m.premultiply(vector.transpose()).transpose().getData()[0], this.r);
 	}
 	
-	public void add(Vector v)
+	public Vector add(Vector v)
 	{
+		int[] v2 = this.v;
+		
 		for(int i = 0; i < this.m; ++i)
-			this.set(i, this.get(i) + v.get(i));
+			v2[i] += v.get(i);
+		
+		return new Vector(v2, this.r);
 	}
 	
-	public void negate()
+	public Vector negate()
 	{
+		int[] v2 = this.v;
+		
 		for(int i = 0; i < this.m; ++i)
-			this.set(i, this.get(i) * -1);
+			v2[i] *= -1;
+		
+		return new Vector(v2, this.r);
 	}
 }

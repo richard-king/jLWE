@@ -56,7 +56,13 @@ public class Vector
 	
 	public void add(Vector v)
 	{
-		for(int i = 0; i < m; ++i)
+		for(int i = 0; i < this.m; ++i)
 			this.set(i, this.get(i) + v.get(i));
+	}
+	
+	public void negate()
+	{
+		for(int i = 0; i < this.m; ++i)
+			this.set(i, this.get(i) * -1);
 	}
 }

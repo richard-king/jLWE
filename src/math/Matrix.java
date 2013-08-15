@@ -7,7 +7,7 @@ public class Matrix
 	private int m, n, q;
 	private int[][] data;
 	
-	public Matrix(int n, int m, boolean b, int q)
+	public Matrix(int m, int n, boolean b, int q)
 	{
 		this.m = m;
 		this.n = n;
@@ -16,7 +16,7 @@ public class Matrix
 		if(b) rand();
 	}
 	
-	public Matrix(int n, int m, double alpha, int q)
+	public Matrix(int m, int n, double alpha, int q)
 	{
 		this.m = m;
 		this.n = n;

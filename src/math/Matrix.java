@@ -54,12 +54,12 @@ public class Matrix
 	
 	public int getRows()
 	{
-		return this.m;
+		return this.n;
 	}
 	
 	public int getCols()
 	{
-		return this.n;
+		return this.m;
 	}
 	
 	public int getQ()

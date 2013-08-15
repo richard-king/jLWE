@@ -8,7 +8,7 @@ public class PublicKey
 	
 	public PublicKey(LWEParams params, PrivateKey s)
 	{
-		this.a = new Matrix(params.m, params.n, true, params.q);
+		this.a = new Matrix(params.m, params.n, true, params.q);		
 		this.p = this.a.premultiply(s.getS()).add(new Matrix(params.m, params.l, params.alpha, params.q));		
 	}
 	

@@ -5,10 +5,10 @@ public class KeyPair
 	private PrivateKey privateKey;
 	private PublicKey publicKey;
 	
-	public KeyPair(int m, int n, int l, int q, double alpha)
+	public KeyPair(LWEParams params)
 	{
-		this.privateKey = new PrivateKey(n, l, q);
-		this.publicKey = new PublicKey(m, n, l, q, alpha, this.privateKey);
+		this.privateKey = new PrivateKey(params);
+		this.publicKey = new PublicKey(params, this.privateKey);
 	}
 	
 	public PrivateKey getPrivateKey()

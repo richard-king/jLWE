@@ -6,11 +6,11 @@ public class CipherText
 {
 	private Vector u, c, a;
 	
-	public CipherText(Vector v, PublicKey p, int r, int q, int t)
+	public CipherText(Vector v, PublicKey p, LWEParams params)
 	{
-		this.a = new Vector(p.getA().getRows(), r);
+		this.a = new Vector(p.getA().getRows(), params.r);
 		this.u = a.multiply(p.getA().transpose());
-		this.c = a.multiply(p.getP().transpose()).add(LWEFunctions.f(v, q, t));
+		this.c = a.multiply(p.getP().transpose()).add(LWEFunctions.f(v, params));
 	}
 	
 	public Vector getC()

@@ -6,9 +6,9 @@ public class PrivateKey
 {
 	private Matrix s;
 	
-	public PrivateKey(int n, int l, int q)
+	public PrivateKey(LWEParams params)
 	{
-		generate(n, l, q);
+		generate(params.n, params.l, params.q);
 	}
 	
 	private void generate(int n, int l, int q)

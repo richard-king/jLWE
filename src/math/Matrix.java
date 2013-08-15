@@ -111,7 +111,7 @@ public class Matrix
 	
 	public Matrix premultiply(Matrix that)
 	{
-		int[][] d = new int[this.getCols()][that.getRows()];
+		int[][] d = new int[this.getRows()][that.getCols()];
 		
 		for(int i = 0; i < this.getRows(); ++i)
 			for(int j = 0; j < that.getRows(); ++j)

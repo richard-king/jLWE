@@ -54,12 +54,12 @@ public class Matrix
 	
 	public int getRows()
 	{
-		return this.n;
+		return this.m;
 	}
 	
 	public int getCols()
 	{
-		return this.m;
+		return this.n;
 	}
 	
 	public int getQ()
@@ -113,7 +113,7 @@ public class Matrix
 	{
 		int[][] d = new int[this.getCols()][that.getRows()];
 		
-		for(int i = 0; i < this.getCols(); ++i)
+		for(int i = 0; i < this.getRows(); ++i)
 			for(int j = 0; j < that.getRows(); ++j)
 				for(int k = 0; k < that.getCols(); ++k)
 					d[i][j] += (this.data[i][k] * that.get(k, j)) % this.q;

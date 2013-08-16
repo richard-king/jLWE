@@ -4,24 +4,9 @@ import math.*;
 
 public class LWEFunctions
 {
-	public static Vector f(Vector v, LWEParams params)
-	{
-		Vector v2 = v;
-		int len = v2.length();
-		for(int i = 0; i < len; ++i)
-			v2.set(i, (int)(((double)v2.get(i) * ((double)params.q/(double)params.t)) % params.q));
-		
-		return v2;
-	}
-	
-	public static Vector f_inv(Vector v, LWEParams params)
-	{
-		return LWEFunctions.f(v, params);
-	}
-	
 	public static Vector decrypt(CipherText ct, PrivateKey pk, LWEParams params)
 	{
-		return LWEFunctions.f_inv(ct.getC().add(ct.getU().multiply(pk.getS().transpose())), params);
+		return Vector.f(Vector.add(Vector.multiply(Matrix.transpose(pk.getS()), ct.getU()), ct.getC()), params.t, params.q);
 	}
 	
 	public static final LWEParams set1 = new LWEParams(136, 2008, 136, 2003, 1, 2, 0.0065);

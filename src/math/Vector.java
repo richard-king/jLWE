@@ -4,73 +4,115 @@ import java.util.Random;
 
 public class Vector
 {
-	private int[] v;
-	private int m, r;
-	
-	public Vector(int m, int r)
+	private int[] data;
+	private int modulus;
+
+	public Vector(int size, int mod)
 	{
-		this.m = m;
-		this.v = new int[m];
-		this.r = r;
-		init();
+		this.data = new int[size];
+		this.modulus = mod;
+		Random r = new Random();
+		for(int i = 0; i < size; i++)
+		{
+			this.data[i] = ((r.nextInt() % this.modulus) + this.modulus) % this.modulus;
+		}
 	}
-	
-	public Vector(int[] v, int r)
+
+	public Vector(int size, int range, int mod)
 	{
-		this.v = v;
-		this.r = r;
-		this.m = v.length;
+		this.data = new int[size];
+		this.modulus = mod;
+		Random r = new Random();
+		for(int i = 0; i < size; i++)
+		{
+			this.data[i] = r.nextInt(2 * range + 1) - range;
+		}
 	}
-	
-	private void init()
-	{
-		Random random = new Random();
-		for(int i = 0; i < this.m; ++i)
-			this.v[i] = random.nextInt(this.r) - this.r;
-	}
-	
+
 	public int get(int i)
 	{
-		return this.v[i];
+		return this.data[i];
 	}
-	
+
 	public void set(int i, int n)
 	{
-		this.v[i] = n;
+		this.data[i] = ((n % this.modulus) + this.modulus) % this.modulus;
 	}
-	
+
 	public int length()
 	{
-		return this.m;
+		return this.data.length;
 	}
-	
-	public Vector multiply(Matrix m)
+
+	public int getModulus()
 	{
-		int[][] data = new int[1][this.m];
-		data[0] = this.v;
-		
-		Matrix vector = new Matrix(data, m.getQ());
-		
-		return new Vector(m.premultiply(vector.transpose()).transpose().getData()[0], this.r);
+		return this.modulus;
 	}
-	
-	public Vector add(Vector v)
+
+	public void print()
 	{
-		int[] v2 = this.v;
-		
-		for(int i = 0; i < this.m; ++i)
-			v2[i] += v.get(i);
-		
-		return new Vector(v2, this.r);
+		for (int i = 0; i < this.data.length; i++)
+		{
+			System.out.print(this.data[i]);
+			if(i != this.data.length - 1)
+			{
+				System.out.print(", ");
+			}
+		}
+		System.out.println(".");
 	}
-	
-	public Vector negate()
+
+	public static Vector f(Vector v, int q, int t)
 	{
-		int[] v2 = this.v;
-		
-		for(int i = 0; i < this.m; ++i)
-			v2[i] *= -1;
-		
-		return new Vector(v2, this.r);
+		double res = (double)q / t;
+		Vector vcopy = new Vector(v.length(), q);
+
+		for(int i = 0; i < v.length(); i++)
+		{
+			vcopy.set(i, ((int)(v.get(i) * res)));
+		}
+
+		return vcopy;
+	}
+
+	public static Vector multiply(Matrix m1, Vector v1)
+	{
+		Vector v = new Vector(m1.getRows(), m1.getModulus());
+
+		for(int i = 0; i < m1.getRows(); i++)
+		{
+			int tmp = 0;
+			for(int j = 0; j < m1.getCols(); j++)
+			{
+				tmp += m1.get(i, j) * v1.get(j);
+			}
+			v.set(i, tmp);
+		}
+
+		return v;
+	}
+
+	public static Vector add(Vector v1, Vector v2)
+	{
+		Vector v = new Vector(v1.length(), v1.getModulus());
+
+		for(int i = 0; i < v1.length(); i++)
+		{
+			v.set(i, v1.get(i) + v2.get(i));
+		}
+
+		return v;
+	}
+
+	public static Vector subtract(Vector v1, Vector v2)
+	{
+		Vector v = new Vector(v1.length(), v1.getModulus());
+
+		for(int i = 0; i < v1.length(); i++)
+		{
+			v.set(i, v1.get(i) - v2.get(i));
+		}
+
+		return v;
 	}
 }

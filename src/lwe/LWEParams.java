@@ -2,10 +2,10 @@ package lwe;
 
 public class LWEParams {
 	
-	public int l, m, n, q, r ,t;
+	public int n, l, m, q, r ,t;
 	public double alpha;
 	
-	public LWEParams(int l, int m, int n, int q, int r, int t, double alpha)
+	public LWEParams(int n, int l, int m, int q, int r, int t, double alpha)
 	{
 		this.l = l;
 		this.m = m;

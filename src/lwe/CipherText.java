@@ -8,9 +8,9 @@ public class CipherText
 	
 	public CipherText(Vector v, PublicKey p, LWEParams params)
 	{
-		this.a = new Vector(p.getA().getRows(), params.r);
-		this.u = a.multiply(p.getA().transpose());
-		this.c = a.multiply(p.getP().transpose()).add(LWEFunctions.f(v, params));
+		this.a = new Vector(p.getA().getRows(), params.r, params.q);
+		this.u = Vector.multiply(Matrix.transpose(p.getA()), a);
+		this.c = Vector.add(Vector.multiply(Matrix.transpose(p.getP()), a), Vector.f(v, params.q, params.t));
 	}
 	
 	public Vector getC()

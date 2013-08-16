@@ -8,12 +8,7 @@ public class PrivateKey
 	
 	public PrivateKey(LWEParams params)
 	{
-		generate(params.n, params.l, params.q);
-	}
-	
-	private void generate(int n, int l, int q)
-	{
-		this.s = new Matrix(n, l, true, q);
+		this.s = new Matrix(params.n, params.l, params.q);
 	}
 	
 	public Matrix getS()

@@ -8,9 +8,7 @@ public class LWE
 	public static void main(String[] args)
 	{
 		KeyPair keypair = new KeyPair(LWEFunctions.set1);
-		int[] ints = new int[LWEFunctions.set1.l];
-		for(int i = 0; i < ints.length; ++i) ints[i] = i;
-		Vector m = new Vector(ints, ints.length);
+		Vector m = new Vector(LWEFunctions.set1.l, LWEFunctions.set1.t);
 		
 		CipherText c = new CipherText(m, keypair.getPublicKey(), LWEFunctions.set1);
 		
